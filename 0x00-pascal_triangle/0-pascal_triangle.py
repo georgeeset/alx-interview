@@ -5,6 +5,9 @@ the Pascal's triangle of n
 
 
 def pascal_triangle(n):
+    """
+    generate the triangle with the value of n
+    """
     big_list = []
     for i in range(n):
         small_list = []
@@ -16,5 +19,6 @@ def pascal_triangle(n):
                 small_list.append(big_list[i - 1][j - 1] + big_list[i - 1][j])
 
         big_list.append(small_list)
-
+        
+    print(big_list)
     return big_list
