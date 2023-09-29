@@ -6,19 +6,27 @@ the Pascal's triangle of n
 
 def pascal_triangle(n):
     """
-    generate the triangle with the value of n
+    Creates a list of lists of integers representing Pascal's triangle
     """
-    big_list = []
-    for i in range(n):
-        small_list = []
-
-        for j in range(i + 1):
-            if i == 0 or j == 0 or i == j or i == 1:
-                small_list.append(1)
-            elif i > 1 and i > j:
-                small_list.append(big_list[i - 1][j - 1] + big_list[i - 1][j])
-
-        big_list.append(small_list)
-        
-    print(big_list)
-    return big_list
+    if type(n) is not int:
+        raise TypeError("n must be an integer")
+    triangle = []
+    if n <= 0:
+        return triangle
+    previous = [1]
+    for row_index in range(n):
+        rowlist = []
+        if row_index == 0:
+            rowlist = [1]
+        else:
+            for i in range(row_index + 1):
+                if i == 0:
+                    rowlist.append(0 + previous[i])
+                elif i == (row_index):
+                    rowlist.append(previous[i - 1] + 0)
+                else:
+                    rowlist.append(previous[i - 1] + previous[i])
+        previous = rowlist
+        triangle.append(rowlist)
+    print(triangle)
+    return triangle
