@@ -29,5 +29,4 @@ def pascal_triangle(n):
 
         big_list.append(small_list)
 
-    print(big_list)
     return big_list
