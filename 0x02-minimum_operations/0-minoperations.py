@@ -13,7 +13,8 @@ def minOperations(n):
         n: The number of desired H characters.
 
     Returns:
-        An integer representing the minimum number of operations needed to achieve n H characters.
+        An integer representing the minimum number of
+        operations needed to achieve n H characters.
     """
     steps = 0
     if n < 2:
