@@ -41,7 +41,7 @@ if __name__ == '__main__':
         for line in sys.stdin:
             scan_input_line(line)
             """ print after every 10 lines """
-            if line_count % 10 == 0:
+            if line_count > 0 and line_count % 10 == 0:
                 print_stats()
             line_count += 1
     except KeyboardInterrupt:
