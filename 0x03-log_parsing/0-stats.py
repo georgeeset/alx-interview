@@ -3,6 +3,7 @@
 import sys
 file_count: list = [0]
 
+
 def print_stats() -> None:
     """
     Print statistics of status_codes
@@ -46,4 +47,5 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print_stats()
         raise
-    print_stats()
+    except Exception as e:
+        pass
