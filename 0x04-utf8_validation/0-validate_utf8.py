@@ -4,7 +4,7 @@
 
 def treat_first_byte(byte: int) -> int:
     """ Check first byte for unicode size
-    return the return the number of myte ecnoded
+    return the number of myte ecnoded
     """
     counter = 0
     # move logic 1 to bit 8 of the byte
