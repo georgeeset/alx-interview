@@ -2,69 +2,41 @@
 """Module for validUtf8 method"""
 
 
-def treat_first_byte(byte: int) -> int:
-    """ Check first byte for unicode size
-    return the number of myte ecnoded
-    """
-    counter = 0
-    # move logic 1 to bit 8 of the byte
-    bit_probe = 1 << 7
-    # print(bit_probe >> 1) # >128
-    while (bit_probe & byte):
-        counter += 1
-        bit_probe = bit_probe >> 1
-    return counter
-
-
-def scan_bytes(data: list[int], size: int) -> bool:
-    """
-    scan for fake data between data[0] and data[size]
-    """
-    for i in range(size):
-        one_byte = None
-        if len(data):
-            one_byte = data.pop(0)
-        elif i == size - 1:
-            # print('data finished pass')
-            return True
-        else:
-            # print('improper')
-            return False
-
-        if (192 & one_byte) == 64:
-            # print(f'new_data = {data}')
-            return True
-        else:
-            # print(f"road block wrong data {one_byte} {bin(one_byte)}")
-            return False
-        # print('pass')
-    return False
-
-
-def validUTF8(data: list[int]) -> bool:
+def validUTF8(data):
     """Determines if given data represents valid UTF-8 encoding
     Args:
         data: list of integers
     Returns:
         True if valid UTF-8 encoding, otherwise False
     """
-    new_data = data.copy()
-    test_result = True
 
-    while new_data:
-        size = treat_first_byte(new_data.pop(0))
+    # print(bin(43))
+    n_bytes = 0
 
-        if size == 1:
-            # print(f'not a utf8 size is {size}')
-            return False
-        elif size > 4:
-            # print(f'oversize_code {size}')
-            return False
-        elif size == 0:
-            # print('one byte data it is')
-            continue
+    sample1 = 1 << 7
+    sample2 = 1 << 6
+    for byte in data:
+
+        # Get the number of set most significant bits in the byte if
+        # this is the starting byte of an UTF-8 character.
+        mask = 1 << 7
+        if n_bytes == 0:
+            while mask & byte:
+                n_bytes += 1
+                mask = mask >> 1
+
+            # 1 byte characters
+            if n_bytes == 0:
+                continue
+
+            # Invalid scenarios according to the rules of the problem.
+            if n_bytes == 1 or n_bytes > 4:
+                return False
         else:
-            while new_data and test_result:
-                test_result = scan_bytes(new_data, size)
-
-    return test_result
+            # If this byte is a part of an existing UTF-8 character, then we
+            # simply have to look at the two most significant bits and we make
+            # use of the masks we defined before.
+            if not (byte & sample1 and not (byte & sample2)):
+                return False
+        n_bytes -= 1
+    return n_bytes == 0
