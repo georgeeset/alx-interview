@@ -18,8 +18,8 @@ def is_attacking(pos0, pos1):
 
 def group_exists(group):
     """Checks if a group exists  """
-    global options
-    for stn in options:
+    global solution
+    for stn in solution:
         i = 0
         for stn_pos in stn:
             for grp_pos in group:
