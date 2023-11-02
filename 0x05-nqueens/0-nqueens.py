@@ -49,7 +49,6 @@ def get_data():
     return n
 
 
-
 def build_solution(row, group):
     """Builds a solution for the n queens problem."""
     global solutions
@@ -69,7 +68,7 @@ def build_solution(row, group):
             group.pop(len(group) - 1)
 
 
-def get_solutions():
+def get_setups():
     """Get the solutions for the given size.
     """
     global pos, n
@@ -80,6 +79,6 @@ def get_solutions():
 
 
 n = get_data()
-get_solutions()
+get_setups()
 for solution in solutions:
     print(solution)
