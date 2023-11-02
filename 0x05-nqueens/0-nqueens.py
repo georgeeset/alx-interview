@@ -44,4 +44,3 @@ if __name__ == "__main__":
         return True
 
     nqueens(0, queens, solution)
-    
