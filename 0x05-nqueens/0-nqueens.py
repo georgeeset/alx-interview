@@ -9,27 +9,6 @@ n = 0
 pos = None
 
 
-def is_attacking(pos0, pos1):
-    """queens are in an attacking mode."""
-    if (pos0[0] == pos1[0]) or (pos0[1] == pos1[1]):
-        return True
-    return abs(pos0[0] - pos1[0]) == abs(pos0[1] - pos1[1])
-
-
-def group_exists(group):
-    """Checks if a group exists  """
-    global solution
-    for stn in solution:
-        i = 0
-        for stn_pos in stn:
-            for grp_pos in group:
-                if stn_pos[0] == grp_pos[0] and stn_pos[1] == grp_pos[1]:
-                    i += 1
-        if i == n:
-            return True
-    return False
-
-
 def get_data():
     """Retrieves and validates this program's argument.
     """
@@ -47,6 +26,27 @@ def get_data():
         print("N must be at least 4")
         sys.exit(1)
     return n
+
+
+def is_attacking(pos0, pos1):
+    """queens are in an attacking mode."""
+    if (pos0[0] == pos1[0]) or (pos0[1] == pos1[1]):
+        return True
+    return abs(pos0[0] - pos1[0]) == abs(pos0[1] - pos1[1])
+
+
+def group_exists(group):
+    """Checks if a group exists  """
+    global solutions
+    for stn in solutions:
+        i = 0
+        for stn_pos in stn:
+            for grp_pos in group:
+                if stn_pos[0] == grp_pos[0] and stn_pos[1] == grp_pos[1]:
+                    i += 1
+        if i == n:
+            return True
+    return False
 
 
 def build_solution(row, group):
@@ -68,7 +68,7 @@ def build_solution(row, group):
             group.pop(len(group) - 1)
 
 
-def get_setups():
+def get_solutions():
     """Get the solutions for the given size.
     """
     global pos, n
@@ -79,6 +79,6 @@ def get_setups():
 
 
 n = get_data()
-get_setups()
+get_solutions()
 for solution in solutions:
     print(solution)
