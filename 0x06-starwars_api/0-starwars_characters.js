@@ -5,7 +5,7 @@
  * as received from starwars api
  */
 
-import request from 'request';
+const request = require('request');
 const movieId = process.argv[2] + '/';
 const starwarsUrl = 'https://swapi-api.hbtn.io/api/films/';
 
